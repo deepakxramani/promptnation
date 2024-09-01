@@ -5,6 +5,8 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 import Form from '@components/Form';
+import { fetchPosts } from '@components/Feed';
+import { useEffect } from 'react/cjs/react.production.min';
 
 const CreatePrompt = () => {
   const router = useRouter();
@@ -28,6 +30,15 @@ const CreatePrompt = () => {
                 tag: post.tag
             })
         })
+
+        // Refetch posts after creation
+        const updatedPosts = await fetchPosts();
+
+        useEffect(() => {
+          updatedPosts();
+        },[])
+        
+    // Handle the updated posts (e.g., update state or re-render component)
 
         if(response.ok) {
             router.push('/');
