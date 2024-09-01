@@ -27,7 +27,10 @@ const EditPrompt = () => {
         })
     }
 
-    if(promptId) getPromptDetails();
+    if(promptId)
+    {
+      getPromptDetails();
+    } 
 
   }, [promptId])
 
